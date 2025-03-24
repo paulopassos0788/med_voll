@@ -1,6 +1,6 @@
-package br.com.passos.med_voll.paciente;
+package br.com.passos.med_voll.domain.paciente;
 
-import br.com.passos.med_voll.endereco.DadosEndereco;
+import br.com.passos.med_voll.domain.endereco.DadosEndereco;
 import jakarta.validation.constraints.NotNull;
 
 public record DadosAtualizacaoPaciente(

@@ -1,6 +1,6 @@
-package br.com.passos.med_voll.paciente;
+package br.com.passos.med_voll.domain.paciente;
 
-import br.com.passos.med_voll.endereco.Endereco;
+import br.com.passos.med_voll.domain.endereco.Endereco;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;

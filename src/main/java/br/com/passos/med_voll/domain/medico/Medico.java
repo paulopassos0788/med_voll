@@ -1,6 +1,6 @@
-package br.com.passos.med_voll.medico;
+package br.com.passos.med_voll.domain.medico;
 
-import br.com.passos.med_voll.endereco.Endereco;
+import br.com.passos.med_voll.domain.endereco.Endereco;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

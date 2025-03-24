@@ -1,6 +1,6 @@
-package br.com.passos.med_voll.medico;
+package br.com.passos.med_voll.domain.medico;
 
-import br.com.passos.med_voll.endereco.Endereco;
+import br.com.passos.med_voll.domain.endereco.Endereco;
 
 public record DadosDetalhamentoMedico(Long id, String nome, String email, String crm, String telefone,
         Especialidade especialidade, Endereco endereco) {

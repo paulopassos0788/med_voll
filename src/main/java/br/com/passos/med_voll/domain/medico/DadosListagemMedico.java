@@ -1,4 +1,4 @@
-package br.com.passos.med_voll.medico;
+package br.com.passos.med_voll.domain.medico;
 
 public record DadosListagemMedico(Long id, String nome, String email, String crm, Especialidade especialidade) {
 
