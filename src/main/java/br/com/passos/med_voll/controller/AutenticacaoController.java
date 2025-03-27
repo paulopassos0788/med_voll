@@ -1,6 +1,9 @@
 package br.com.passos.med_voll.controller;
 
 import br.com.passos.med_voll.domain.usuario.DadosAutenticacao;
+import br.com.passos.med_voll.domain.usuario.Usuario;
+import br.com.passos.med_voll.infra.security.DadosTokenJWT;
+import br.com.passos.med_voll.infra.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,11 +22,17 @@ public class AutenticacaoController {
     @Autowired
     private AuthenticationManager authManager;
 
-    @PostMapping
-    public ResponseEntity efetuarLogin(@RequestBody @Valid DadosAutenticacao dados){
-        var token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
-        var authentication = authManager.authenticate(token);
+    @Autowired
+    private TokenService tokenService;
 
-        return ResponseEntity.status(HttpStatus.OK).build();
+    @PostMapping
+    public ResponseEntity efetuarLogin(@RequestBody @Valid DadosAutenticacao dados) {
+        var authenticationToken = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
+        var authentication = authManager.authenticate(authenticationToken);
+
+        var tokenJWT = tokenService.gerarToken((Usuario) authentication.getPrincipal());
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new DadosTokenJWT(tokenJWT));
     }
 }
