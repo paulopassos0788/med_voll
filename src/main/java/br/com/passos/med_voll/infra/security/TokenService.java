@@ -3,6 +3,8 @@ package br.com.passos.med_voll.infra.security;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.auth0.jwt.JWT;
@@ -26,6 +28,19 @@ public class TokenService {
                     .sign(algoritmo);
         } catch (JWTCreationException exception) {
             throw new RuntimeException("Erro ao gerar token", exception);
+        }
+    }
+
+    public String getSubject(String tokenJWT) {
+        try {
+            var algoritmo = Algorithm.HMAC256(secret);
+            return JWT.require(algoritmo)
+                    .withIssuer("API do MedVoll")
+                    .build()
+                    .verify(tokenJWT)
+                    .getSubject();
+        } catch (JWTVerificationException exception) {
+            throw new RuntimeException("Token JWT inválido ou expirado!");
         }
     }
 
