@@ -25,6 +25,14 @@ public class Consulta implements Serializable {
 
     private LocalDateTime data;
 
+    @Column(name = "motivo_cancelamento")
+    @Enumerated(EnumType.STRING)
+    private MotivoCancelamento motivoCancelamento;
+
+    public void cancelar(MotivoCancelamento motivo) {
+        this.motivoCancelamento = motivo;
+    }
+
     public Consulta(Medico medico, Paciente paciente, LocalDateTime data) {
         this.medico = medico;
         this.paciente = paciente;
@@ -64,6 +72,14 @@ public class Consulta implements Serializable {
 
     public void setData(LocalDateTime data) {
         this.data = data;
+    }
+
+    public MotivoCancelamento getMotivoCancelamento() {
+        return motivoCancelamento;
+    }
+
+    public void setMotivoCancelamento(MotivoCancelamento motivoCancelamento) {
+        this.motivoCancelamento = motivoCancelamento;
     }
 
     @Override

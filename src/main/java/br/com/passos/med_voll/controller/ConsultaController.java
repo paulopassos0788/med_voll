@@ -3,6 +3,7 @@ package br.com.passos.med_voll.controller;
 import br.com.passos.med_voll.domain.agendamento.AgendaDeConsultas;
 import br.com.passos.med_voll.domain.agendamento.DadosAgendamentoConsulta;
 import br.com.passos.med_voll.domain.agendamento.DadosDetalhamentoConsulta;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("consultas")
+@SecurityRequirement(name = "bearer-key")
 public class ConsultaController {
 
     @Autowired
