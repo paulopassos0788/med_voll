@@ -1,2 +1,2 @@
-ALTER TABLE medicos ADD COLUMN ativo BOOLEAN DEFAULT TRUE;
-UPDATE medicos SET ativo = TRUE;
+alter table medicos add ativo tinyint;
+update medicos set ativo = 1;

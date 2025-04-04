@@ -33,10 +33,12 @@ public class Consulta implements Serializable {
         this.motivoCancelamento = motivo;
     }
 
-    public Consulta(Medico medico, Paciente paciente, LocalDateTime data) {
+    public Consulta(Long id, Medico medico, Paciente paciente, LocalDateTime data, MotivoCancelamento motivoCancelamento) {
+        this.id = id;
         this.medico = medico;
         this.paciente = paciente;
         this.data = data;
+        this.motivoCancelamento = motivoCancelamento;
     }
 
     public Consulta() {

@@ -4,29 +4,31 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
 import java.time.LocalDateTime;
 
 public interface MedicoRepository extends JpaRepository<Medico, Long> {
 
     Page<Medico> findAllByAtivoTrue(Pageable pageable);
 
-    @Query(value = """
-        select * from Medico m
-        where
-        m.ativo = 1
-        and
-        m.especialidade = :especialidade
-        and
-        m.id not in(
-            select c.medico_id from Consulta c
+    @Query("""
+            select m from Medico m
             where
-            c.data = :data
+            m.ativo = true
             and
-            c.motivo_cancelamento is null
-        )
-        order by rand()
-        limit 1
-    """, nativeQuery = true)
+            m.especialidade = :especialidade
+            and
+            m.id not in(
+                select c.medico.id from Consulta c
+                where
+                c.data = :data
+                and
+                c.motivoCancelamento is null
+            )
+            order by rand()
+            limit 1
+        """)
     Medico escolherMedicoAleatorioLivreNaData(Especialidade especialidade, LocalDateTime data);
 
     @Query("""
